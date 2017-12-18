@@ -97,6 +97,24 @@ public:
 		return c;
 	}
 
+	EnergyModel operator*(int p)
+	{
+		EnergyModel c;
+		c._rd_iobuf = _rd_iobuf * p;
+		c._wr_iobuf = _wr_iobuf * p;
+
+		c._rd_weight = _rd_weight * p;
+		c._wr_weight = _wr_weight * p;
+
+		c._rd_ddr = _rd_ddr * p;
+		c._wr_ddr = _wr_ddr * p;
+
+		c._bg = _bg * p;
+		c._calc = _calc * p;
+
+		return c;
+	}
+
 	double Total()
 	{
 		return _rd_iobuf + _wr_iobuf +

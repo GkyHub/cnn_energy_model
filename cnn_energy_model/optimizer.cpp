@@ -40,7 +40,7 @@ void Optimizer::LoadNetFromFile(const std::string fn) {
 
 // optimize the schedule of a single layer to minimize energy
 // the optimized energy is returned
-EnergyModel Optimizer::OptSingleLayer(Accelerator *acc, Layer *l, bool input_ready, bool weight_ready)
+EnergyModel Optimizer::_optSingleLayer(Accelerator *acc, Layer *l, bool input_ready, bool weight_ready)
 {
 	EnergyModel ene;
 
@@ -115,6 +115,18 @@ EnergyModel Optimizer::OptSingleLayer(Accelerator *acc, Layer *l, bool input_rea
 		ene._wr_ddr += l->GetOutputMapSize() * acc->_ddr._unit_wr_ene;
 	}
 
+	return ene;
+}
+
+EnergyModel Optimizer::OptSingleLayer(Accelerator *acc, Layer *l, bool input_ready, bool weight_ready)
+{
+	EnergyModel ene;
+	Layer *ker_layer = new Layer(*l);
+	ker_layer->_input_map_num /= l->_group;
+	ker_layer->_output_map_num /= l->_group;
+	ene = _optSingleLayer(acc, ker_layer, input_ready, weight_ready);
+	ene = ene * l->_group;
+	delete ker_layer;
 	return ene;
 }
 

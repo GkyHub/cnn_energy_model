@@ -22,6 +22,8 @@ public:
 	int _pool_y;
 	int _pool_str;
 
+	int _group;
+
 public:
 	void GetOutputMapShape(int &output_map_x, int &output_map_y);
 
@@ -44,6 +46,8 @@ public:
 		is >> l._kernel_x;
 		l._kernel_y = l._kernel_x;
 		is >> l._kernel_str;
+		// group
+		is >> l._group;
 		// pooling parameter
 		is >> l._is_pooling;
 		if (l._is_pooling) {

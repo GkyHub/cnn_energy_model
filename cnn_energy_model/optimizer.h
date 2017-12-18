@@ -45,4 +45,7 @@ public:
 
 	// Calculate the energy efficiency
 	double EnergyEfficiency(EnergyModel ene);
+
+private:
+	EnergyModel _optSingleLayer(Accelerator *acc, Layer *l, bool input_ready, bool weight_ready);
 };

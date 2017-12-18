@@ -7,14 +7,14 @@ Accelerator InitializeAccelerator(int i, int j, int k, bool use_rram);
 int main() {
 
 	std::ofstream csv_file[5];
-	csv_file[0].open("ss_vgg11_conv.csv", std::ios::out);
-	csv_file[1].open("ss_vgg11_conv_f16.csv", std::ios::out);
-	csv_file[2].open("ss_vgg11_conv_f32.csv", std::ios::out);
-	csv_file[3].open("ss_vgg11_conv_f64.csv", std::ios::out);
-	csv_file[4].open("ss_vgg11_conv_f128.csv", std::ios::out);
+	csv_file[0].open(".\\result\\ss_vgg11_conv.csv", std::ios::out);
+	csv_file[1].open(".\\result\\ss_vgg11_conv_f16.csv", std::ios::out);
+	csv_file[2].open(".\\result\\ss_vgg11_conv_f32.csv", std::ios::out);
+	csv_file[3].open(".\\result\\ss_vgg11_conv_f64.csv", std::ios::out);
+	csv_file[4].open(".\\result\\ss_vgg11_conv_f128.csv", std::ios::out);
 
 	Optimizer opt;
-	opt.LoadNetFromFile("vgg-11-conv.txt");
+	opt.LoadNetFromFile(".\\model\\vgg-11-conv.txt");
 	std::cout << "load completed!" << std::endl;
 
 	for (int k = 0; k < 5; k++) {
